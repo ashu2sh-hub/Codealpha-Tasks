@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina Gallery — Curated Visual Anthology</title>
+  <meta name="description" content="A minimal, elegant vanilla HTML, CSS, and JavaScript image gallery featuring cars, flowers, and landscapes with an interactive lightbox viewer.">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Lumina Gallery — Curated Visual Anthology">
+  <meta property="og:description" content="A minimal, elegant vanilla HTML, CSS, and JavaScript image gallery with category filtering and lightbox viewer.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon / Styling (Strictly Relative Paths for GitHub Pages) -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#gallery-container" class="skip-to-content">Skip to image gallery</a>
+
+  <!-- 1. Minimal Header / Navigation -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <a href="./index.html" class="brand-logo" id="brand-logo">Lumina</a>
+        <span class="brand-tagline">Photographic Anthology</span>
+      </div>
+
+      <nav class="header-nav" aria-label="Main Navigation">
+        <a href="#gallery-container" class="nav-link">Collection</a>
+        <a href="#about-section" class="nav-link">About</a>
+        <span class="nav-badge">18 Plates</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main id="main-content" role="main">
+    <!-- 2. Simple Hero Section -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-meta">
+          <span>Curated Series</span>
+          <span class="hero-meta-dot" aria-hidden="true"></span>
+          <span>Vol. I &bull; 2026</span>
+        </div>
+        <h1 class="hero-title" id="hero-title">
+          The art of form, flora, and <em>vast topographies</em>.
+        </h1>
+        <p class="hero-description">
+          A visual collection exploring mechanical precision in automotive design, botanical delicacy in wild blossoms, and the enduring scale of untouched landscapes.
+        </p>
+
+        <div class="hero-stats-row">
+          <div class="stat-item">
+            <span class="stat-number">18</span>
+            <span class="stat-label">Plates</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">03</span>
+            <span class="stat-label">Themes</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">4K</span>
+            <span class="stat-label">High-Res</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">00</span>
+            <span class="stat-label">Build Steps</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Category Filter & 4. Image Gallery Section -->
+    <section class="gallery-section" id="gallery-container" aria-label="Image Showcase">
+      <div class="filter-toolbar">
+        <!-- Filter Buttons -->
+        <div class="filter-buttons-group" role="tablist" aria-label="Gallery category filters">
+          <button class="filter-btn active" data-filter="all" id="filter-all" role="tab" aria-selected="true">
+            <span>All Works</span>
+            <span class="filter-count" id="count-all">18</span>
+          </button>
+          <button class="filter-btn" data-filter="cars" id="filter-cars" role="tab" aria-selected="false">
+            <span>Cars</span>
+            <span class="filter-count" id="count-cars">6</span>
+          </button>
+          <button class="filter-btn" data-filter="flowers" id="filter-flowers" role="tab" aria-selected="false">
+            <span>Flowers</span>
+            <span class="filter-count" id="count-flowers">6</span>
+          </button>
+          <button class="filter-btn" data-filter="landscapes" id="filter-landscapes" role="tab" aria-selected="false">
+            <span>Landscapes</span>
+            <span class="filter-count" id="count-landscapes">6</span>
+          </button>
+        </div>
+
+        <!-- Filter Count Status -->
+        <div class="gallery-status" id="gallery-status" aria-live="polite">
+          Showing <strong>18</strong> of <strong>18</strong> works
+        </div>
+      </div>
+
+      <!-- Gallery Grid Container -->
+      <div class="gallery-grid" id="gallery-grid" role="region" aria-label="Image gallery collection">
+        <!-- Cards dynamically injected by script.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- 5. Lightbox Viewer Dialog -->
+  <dialog class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image Lightbox Viewer" hidden>
+    <!-- Lightbox Header -->
+    <div class="lightbox-header">
+      <div class="lightbox-info-badge">
+        <span class="lightbox-cat-badge" id="lightbox-cat-badge">Category</span>
+        <span class="lightbox-counter" id="lightbox-counter" aria-live="polite">1 / 18</span>
+      </div>
+
+      <div class="lightbox-actions">
+        <a href="#" class="lightbox-btn" id="lightbox-fullview-btn" target="_blank" rel="noopener noreferrer" aria-label="Open full resolution in new tab">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+        <button type="button" class="lightbox-btn lightbox-close-btn" id="lightbox-close-btn" aria-label="Close lightbox viewer (Escape)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Lightbox Main Stage -->
+    <div class="lightbox-stage">
+      <button type="button" class="lightbox-nav-btn" id="lightbox-prev-btn" aria-label="Previous image (Left Arrow)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="lightbox-media-container">
+        <div class="lightbox-image-wrapper">
+          <img src="" alt="" class="lightbox-img" id="lightbox-img">
+          <div class="lightbox-spinner" id="lightbox-spinner" aria-label="Loading image"></div>
+        </div>
+      </div>
+
+      <button type="button" class="lightbox-nav-btn" id="lightbox-next-btn" aria-label="Next image (Right Arrow)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Lightbox Footer Info -->
+    <div class="lightbox-footer">
+      <div class="lightbox-caption">
+        <h2 class="lightbox-title" id="lightbox-title">Photograph Title</h2>
+        <p class="lightbox-details" id="lightbox-location">Location and description details</p>
+      </div>
+
+      <div class="lightbox-shortcuts-hint">
+        <span>Navigate</span>
+        <span class="kbd-badge">&larr;</span>
+        <span class="kbd-badge">&rarr;</span>
+        <span>Exit</span>
+        <span class="kbd-badge">Esc</span>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 6. Simple Footer -->
+  <footer class="site-footer" id="about-section" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-brand-col">
+        <span class="footer-logo">Lumina</span>
+        <p class="footer-desc">Crafted with pure HTML5, CSS3 &amp; JavaScript. Zero dependencies, 100% static.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" class="footer-link">Photography via Unsplash</a>
+        <button type="button" class="back-to-top-btn" id="back-to-top-btn" aria-label="Scroll back to top">
+          <span>Back to top</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript (Strictly Relative Path for GitHub Pages) -->
+  <script src="./script.js"></script>
+</body>
+</html>
